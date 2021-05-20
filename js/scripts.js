@@ -60,3 +60,11 @@ dyn_functions['result'] = function (json) {
     $('.result').show().attr('src',json);
     //$('#image').html(json);
 }
+
+/* ready */
+$(document).ready(function () {
+    // DOC: https://seballot.github.io/spectrum/
+    $('.color-picker').spectrum({
+        type: "component"
+    });
+})
