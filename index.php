@@ -25,7 +25,7 @@
             font-size: 1rem !important;
         }
         textarea{
-            min-height: 200px;
+            min-height: 160px;
         }
         input[type="submit"]{
             font-size: 1rem !important;
