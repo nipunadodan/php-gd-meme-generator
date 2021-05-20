@@ -18,6 +18,7 @@
             font-family: 'Inter','Roboto', sans-serif;
         }
         label{
+            display: block;
             font-size: 1rem !important;
             margin: 15px 0 7px !important;
         }
@@ -49,7 +50,7 @@
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="title-colour" value='#adefd1' />
+                            <input class="color-picker" name="title-colour" value='#f2aa4c' />
                         </div>
                     </div>
                     <div class="row">
@@ -65,7 +66,7 @@
                     <div class="row">
                         <div class="col-md-9">
                             <label>Tag</label>
-                            <input name="tag" placeholder="Tag" value="#dodanperks" class="bg-dark text-white" style="font-weight: normal" />
+                            <input name="tag" placeholder="Tag" value="dodanperks" class="bg-dark text-white" style="font-weight: normal" />
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
@@ -74,10 +75,6 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label>Image</label>
-                            <input type="file" name="image" placeholder="Image" class="bg-dark text-white" style="font-weight: normal" />
-                        </div>
-                        <div class="col-md-3">
                             <label>Width</label>
                             <input name="width" placeholder="Width" value="1600" class="bg-dark text-white" style="font-weight: normal" />
                         </div>
@@ -85,9 +82,9 @@
                             <label>Height</label>
                             <input name="height" placeholder="Height" value="1200" class="bg-dark text-white" style="font-weight: normal" />
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 offset-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="background-colour" value='#00203F' />
+                            <input class="color-picker" name="background-colour" value='#101820' />
                         </div>
                     </div>
                     <input type="submit" value="Generate" class="w-auto p-3 mt-5">

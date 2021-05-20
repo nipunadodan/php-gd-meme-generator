@@ -65,6 +65,7 @@ dyn_functions['result'] = function (json) {
 $(document).ready(function () {
     // DOC: https://seballot.github.io/spectrum/
     $('.color-picker').spectrum({
-        type: "component"
+        type: "component",
+        preferredFormat: "hex",
     });
 })
