@@ -52,17 +52,17 @@
                     <div class="row">
                         <div class="col-md-9">
                             <label>Title</label>
-                            <input name="title" placeholder="Title" class="dark-mode" style="font-weight: normal" />
+                            <input id="title" name="title" placeholder="Title" class="dark-mode" style="font-weight: normal" />
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="title-colour" value='#f2aa4c' />
+                            <input class="color-picker" name="title-colour" value='#f89a1f' />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-9">
                             <label>Body</label>
-                            <textarea name="body" placeholder="Body" class="dark-mode" style="font-weight: normal"></textarea>
+                            <textarea id="body" name="body" placeholder="Body" class="dark-mode" style="font-weight: normal"></textarea>
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="tag-colour" value='#d1d1d1' />
+                            <input class="color-picker" name="tag-colour" value='#e0e0e0' />
                         </div>
                     </div>
                     <div class="row">

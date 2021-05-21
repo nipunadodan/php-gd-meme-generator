@@ -86,12 +86,26 @@ function toggleDarkMode() {
 let dyn_functions = [];
 
 dyn_functions['result'] = function (json) {
-    $('.result').show().attr('src',json);
-    $('#result').show();
+    const title = $('#title').val();
+    const body = $('#body').val();
+    if(json.status === 'success') {
+        $('.result').show().attr('src', json.image);
+        $('#result').show();
+        localStorage.setItem('gdText-title',title);
+        localStorage.setItem('gdText-body',body);
+    }
 }
 
 /* ready */
 $(document).ready(function () {
+    if(localStorage.getItem('gdText-title') !== null) {
+        $('#title').val(localStorage.getItem('gdText-title'));
+    }
+    if(localStorage.getItem('gdText-body') !== null){
+        $('#body').val(localStorage.getItem('gdText-body'));
+    }
+
+
     // DOC: https://seballot.github.io/spectrum/
     $('.color-picker').spectrum({
         type: "component",

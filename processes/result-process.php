@@ -115,5 +115,10 @@ imagepng($im);
 $imagestring = ob_get_contents();
 ob_end_clean();
 
-echo 'data:image/png;base64, '.base64_encode($imagestring);
+$return = [
+    'status' => 'success',
+    'image' => 'data:image/png;base64, '.base64_encode($imagestring),
+    'message' => 'Successfully created the image'
+];
+echo json_encode($return);
 imagedestroy($im);

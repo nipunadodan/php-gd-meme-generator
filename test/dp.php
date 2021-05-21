@@ -28,15 +28,15 @@ function hexToColor($hex = '#ff4b8c'){
  * SETTINGS
  * ======== */
 
-$width = 1702;
-$height = 630;
+$width = 1200;
+$height = 1200;
 
-$textColour = hexToColor('#f2aa4c');
-$backColour = hexToRgb('#101820');
+$textColour = hexToColor('#f89a1f');
+$backColour = hexToRgb('#313131');
 
-$text = '#dodanperks';
+$text = '#dp';
 
-$fontSize = 140;
+$fontSize = 420;
 
 $im = imagecreatetruecolor($width,$height);
 $backgroundColor = imagecolorallocate($im, $backColour[0], $backColour[1], $backColour[2]);
