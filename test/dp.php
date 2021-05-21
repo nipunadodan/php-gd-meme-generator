@@ -46,7 +46,7 @@ $box = new Box($im);
 $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-ExtraBold.ttf'); // http://www.dafont.com/prisma.font
 $box->setFontSize($fontSize);
 $box->setFontColor($textColour);
-$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
+//$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
 $box->setBox(0, 0, $width,$height);
 $box->setTextAlign('center', 'center');
 $box->draw($text);

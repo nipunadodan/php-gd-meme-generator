@@ -54,11 +54,40 @@ $('form').submit(function (e) {
     })
 });
 
+/*------------------------------*/
+function darkMode(toggle) {
+    if (localStorage.getItem("gdText-darkmode") !== null && localStorage.getItem("gdText-darkmode") === 'dark') {
+        $('.dark-mode').addClass('text-white bg-dark');
+
+    }else if(localStorage.getItem("gdText-darkmode") !== null && localStorage.getItem("gdText-darkmode") === 'light'){
+        $('.dark-mode').removeClass('text-white bg-dark');
+        if(toggle) {
+            localStorage.setItem("gdText-darkmode", "dark");
+            $('.dark-mode').addClass('text-white bg-dark');
+        }
+    }else{
+        localStorage.setItem("gdText-darkmode", "light");
+        darkMode();
+    }
+}
+
+function toggleDarkMode() {
+    if (localStorage.getItem("gdText-darkmode") !== null && localStorage.getItem("gdText-darkmode") === 'dark') {
+        localStorage.setItem("gdText-darkmode", "light");
+        $('.dark-mode').removeClass('text-white bg-dark');
+    }else{
+        localStorage.setItem("gdText-darkmode", "dark");
+        $('.dark-mode').addClass('text-white bg-dark');
+    }
+}
+
+/*------------------------------*/
+
 let dyn_functions = [];
 
 dyn_functions['result'] = function (json) {
     $('.result').show().attr('src',json);
-    //$('#image').html(json);
+    $('#result').show();
 }
 
 /* ready */
@@ -68,4 +97,11 @@ $(document).ready(function () {
         type: "component",
         preferredFormat: "hex",
     });
+
+    darkMode();
+
+    $('#display-mode').on('click', function (e) {
+        e.preventDefault();
+        toggleDarkMode();
+    })
 })
