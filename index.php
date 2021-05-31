@@ -129,8 +129,10 @@
                         </div>
                     </div>
                 </form>
-                <footer class="text-small">&copy; <?php echo date('Y')?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and
-                    <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></footer>
+                <footer class="text-small">
+                    <p>&copy; <?php echo date('Y') ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
+                    <p>No data are saved on servers. Everything is saved on your browser.</p>
+                </footer>
             </div>
             <div class="col-md-6 mt-md-8 mb-5" id="result" style="display: none">
                 <img src="" class="result img-fluid" style="display: none">
