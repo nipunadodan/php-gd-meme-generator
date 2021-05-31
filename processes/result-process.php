@@ -80,7 +80,7 @@ $box = new Box($im);
 if($lang == 'en') {
     $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Regular.ttf');
 }else{
-    $box->setFontFace(DOC_ROOT . '/fonts/Ganganee.ttf');
+    $box->setFontFace(DOC_ROOT . '/fonts/Malithi.ttf');
 }
 $box->setFontSize(45);
 $box->setFontColor($bodyColour);
