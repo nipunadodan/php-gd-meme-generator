@@ -64,7 +64,7 @@
                             <label>Language</label>
                             <select id="lang" name="lang" class="dark-mode" style="font-weight: normal">
                                 <option value="en">English</option>
-                                <option value="si">Sinhala</option>
+                                <option value="si">Sinhala (Unicode)</option>
                             </select>
                         </div>
                     </div>
