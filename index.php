@@ -2,9 +2,12 @@
 <head>
     <link rel="icon" type="image/png" href="https://nipunadodan.com/favicon.png">
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Nipuna Dodantenna">
+    <meta name="description" content="A simple text to image meme generator.">
+    <meta name="keywords" content="meme, generator, text, english, sinhala, php, ed, dodanperks">
+    <meta name="theme-color" content="#313131" />
 
     <title>#dodanperks</title>
 
