@@ -88,11 +88,13 @@ let dyn_functions = [];
 dyn_functions['result'] = function (json) {
     const title = $('#title').val();
     const body = $('#body').val();
+    const lang = $('#lang').val();
     if(json.status === 'success') {
         $('.result').show().attr('src', json.image);
         $('#result').show();
         localStorage.setItem('gdText-title',title);
         localStorage.setItem('gdText-body',body);
+        localStorage.setItem('gdText-lang',lang);
     }
 }
 
@@ -103,6 +105,29 @@ $(document).ready(function () {
     }
     if(localStorage.getItem('gdText-body') !== null){
         $('#body').val(localStorage.getItem('gdText-body'));
+    }
+    if(localStorage.getItem('gdText-lang') !== null){
+        $('#lang').val(localStorage.getItem('gdText-lang'));
+    }
+
+    $('#title,#body').trigger('keyup');
+    if($('#lang').val() === 'si') {
+
+        $('#title, #body').each(function () {
+            const elem_id = $(this).attr('id');
+            const text = $(this).val();
+
+            startText(text, elem_id);
+        });
+        $('#title, #body, #lang, #submit').on('keyup change click', function () {
+            const elem_id = $(this).attr('id');
+            const text = $(this).val();
+
+            startText($(this).val(), elem_id);
+        });
+    }else{
+        $('#title_').val($('#title').val());
+        $('#body_').val($('#body').val());
     }
 
 

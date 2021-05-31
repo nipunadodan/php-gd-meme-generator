@@ -26,10 +26,10 @@ function hexToColor($hex = '#ff4b8c'){
 /*
  *  POST variables =======================
  */
-$title = isset($_POST['title']) && $_POST['title'] !== '' ? $_POST['title'] : '';
+$title = isset($_POST['title_']) && $_POST['title_'] !== '' ? $_POST['title_'] : '';
 $titleColour = isset($_POST['title-colour']) && $_POST['title-colour'] !== '' ? hexToColor($_POST['title-colour']) : hexToColor('#d1d1d1');
 
-$body = isset($_POST['body']) && $_POST['body'] !== '' ? $_POST['body'] : '';
+$body = isset($_POST['body_']) && $_POST['body_'] !== '' ? $_POST['body_'] : '';
 $bodyColour = isset($_POST['body-colour']) && $_POST['body-colour'] !== '' ? hexToColor($_POST['body-colour']) : hexToColor('#d1d1d1');
 
 $tag = isset($_POST['tag']) && $_POST['tag'] !== '' ? $_POST['tag'] : '';
@@ -38,6 +38,7 @@ $tagColour = isset($_POST['tag-colour']) && $_POST['tag-colour'] !== '' ? hexToC
 $width = isset($_POST['width']) && $_POST['width'] !== '' ? intval($_POST['width']) : 1600;
 $height = isset($_POST['height']) && $_POST['height'] !== '' ? intval($_POST['height']) : 1200;
 $backColour = isset($_POST['background-colour']) && $_POST['background-colour'] !== '' ? hexToRgb($_POST['background-colour']) : hexToRgb('#00203F');
+$lang = isset($_POST['lang']) && $_POST['lang'] !== '' ? $_POST['lang'] : 'en';
 
 
 /*
@@ -62,25 +63,35 @@ $box->setTextAlign('left', 'top');*/
 //$box->draw('&#xf0eb;');
 
 $box = new Box($im);
-$box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Black.ttf');
-$box->setFontSize(90);
+if($lang == 'en') {
+//$box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Black.ttf');
+    $box->setFontFace(DOC_ROOT . '/fonts/Oswald/Oswald-Bold.ttf');
+}else{
+    $box->setFontFace(DOC_ROOT . '/fonts/Ganganee.ttf');
+}
+$box->setFontSize(100);
 $box->setFontColor($titleColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, 300, 1200, 460);
+$box->setBox(150, 280, 1200, 460);
 $box->setTextAlign('left', 'top');
 $box->draw($title);
 
 $box = new Box($im);
-$box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-SemiBold.ttf');
-$box->setFontSize(40);
+if($lang == 'en') {
+    $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Regular.ttf');
+}else{
+    $box->setFontFace(DOC_ROOT . '/fonts/Ganganee.ttf');
+}
+$box->setFontSize(45);
 $box->setFontColor($bodyColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, 550, 1100, 1060);
+$box->setBox(150, 515, 1100, 1060);
 $box->setTextAlign('left', 'top');
 $box->draw($body);
 
 $box = new Box($im);
 $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-ExtraBold.ttf');
+
 $box->setFontColor($titleColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
 $box->setFontSize(50);
