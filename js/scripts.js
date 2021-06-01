@@ -134,24 +134,19 @@ $(document).ready(function () {
     }
 
     $('#title,#body').trigger('keyup');
-    if($('#lang').val() === 'si') {
+
+    $('#title, #body, #lang, #submit').on('keyup change click', function () {
         $('#title, #body').each(function () {
             const elem_id = $(this).attr('id');
             const text = $(this).val();
 
-            startText(text, elem_id);
+            if($('#lang').val() === 'si') {
+                startText(text, elem_id);
+            }else{
+                $('#'+elem_id+'_').val(text);
+            }
         });
-
-        $('#title, #body, #lang, #submit').on('keyup change click', function () {
-            const elem_id = $(this).attr('id');
-            const text = $(this).val();
-
-            startText($(this).val(), elem_id);
-        });
-    }else{
-        $('#title_').val($('#title').val());
-        $('#body_').val($('#body').val());
-    }
+    });
 
 
     // DOC: https://seballot.github.io/spectrum/
