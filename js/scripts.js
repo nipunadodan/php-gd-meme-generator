@@ -89,12 +89,23 @@ dyn_functions['result'] = function (json) {
     const title = $('#title').val();
     const body = $('#body').val();
     const lang = $('#lang').val();
+    const titleColour = $('#title-colour').val();
+    const bodyColour = $('#body-colour').val();
+    const tagColour = $('#tag-colour').val();
+    const bgColour = $('#background-colour').val();
     if(json.status === 'success') {
         $('.result').show().attr('src', json.image);
         $('#result').show();
+        $('html, body').animate({
+            scrollTop: $("#result").offset().top
+        }, 300);
         localStorage.setItem('gdText-title',title);
         localStorage.setItem('gdText-body',body);
         localStorage.setItem('gdText-lang',lang);
+        localStorage.setItem('gdText-title-colour',titleColour);
+        localStorage.setItem('gdText-body-colour',bodyColour);
+        localStorage.setItem('gdText-tag-colour',tagColour);
+        localStorage.setItem('gdText-bg-colour',bgColour);
     }
 }
 
@@ -109,16 +120,28 @@ $(document).ready(function () {
     if(localStorage.getItem('gdText-lang') !== null){
         $('#lang').val(localStorage.getItem('gdText-lang'));
     }
+    if(localStorage.getItem('gdText-title-colour') !== null) {
+        $('#title-colour').val(localStorage.getItem('gdText-title-colour'));
+    }
+    if(localStorage.getItem('gdText-body-colour') !== null){
+        $('#body-colour').val(localStorage.getItem('gdText-body-colour'));
+    }
+    if(localStorage.getItem('gdText-tag-colour') !== null){
+        $('#tag-colour').val(localStorage.getItem('gdText-tag-colour'));
+    }
+    if(localStorage.getItem('gdText-bg-colour') !== null){
+        $('#background-colour').val(localStorage.getItem('gdText-bg-colour'));
+    }
 
     $('#title,#body').trigger('keyup');
     if($('#lang').val() === 'si') {
-
         $('#title, #body').each(function () {
             const elem_id = $(this).attr('id');
             const text = $(this).val();
 
             startText(text, elem_id);
         });
+
         $('#title, #body, #lang, #submit').on('keyup change click', function () {
             const elem_id = $(this).attr('id');
             const text = $(this).val();

@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="title-colour" value='#f89a1f' />
+                            <input class="color-picker" name="title-colour" id="title-colour" value='#f89a1f' />
                         </div>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="body-colour" value='#ffffff' />
+                            <input class="color-picker" name="body-colour" id="body-colour" value='#ffffff' />
                         </div>
                     </div>
                     <div class="row">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="tag-colour" value='#e0e0e0' />
+                            <input class="color-picker" name="tag-colour" id="tag-colour" value='#e0e0e0' />
                         </div>
                     </div>
                     <div class="row">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-md-3 offset-md-3">
                             <label>Colour</label>
-                            <input class="color-picker" name="background-colour" value='#313131' />
+                            <input class="color-picker" name="background-colour" id="background-colour" value='#313131' />
                         </div>
                     </div>
                     <div class="row mt-3 align-content-center">
@@ -129,15 +129,15 @@
                         </div>
                     </div>
                 </form>
-                <footer class="text-small">
-                    <p>&copy; <?php echo date('Y') ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
-                    <p>No data are saved on servers. Everything is saved on your browser.</p>
-                </footer>
             </div>
             <div class="col-md-6 mt-md-8 mb-5" id="result" style="display: none">
                 <img src="" class="result img-fluid" style="display: none">
             </div>
         </div>
+        <footer class="text-small text-center">
+            <p>&copy; <?php echo date('Y') ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
+            <p>No data saved on servers. Everything is saved on your browser.</p>
+        </footer>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
