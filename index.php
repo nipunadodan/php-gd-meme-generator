@@ -1,3 +1,4 @@
+<?php include_once 'config.php'?>
 <html>
 <head>
     <link rel="icon" type="image/png" href="https://nipunadodan.com/favicon.png">
@@ -58,7 +59,7 @@
 </head>
 <body class="dark-mode">
     <div class="container">
-        <div class="row align-content-center justify-content-center min-vh-100 justify-content-center">
+        <div class="row align-content-center min-vh-100">
             <div class="col-md-6">
                 <h1 style="font-weight: bolder" class="display-1 mt-5">#dodanperks</h1>
                 <form class="form" name="result" method="post" action="test/result.php">
@@ -130,12 +131,12 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-6 mt-md-8 mb-5" id="result" style="display: none">
+            <div class="col-md-6 mt-md-8 mt-5 mb-5" id="result" style="display: none">
                 <img src="" class="result img-fluid" style="display: none">
             </div>
         </div>
-        <footer class="text-small text-center">
-            <p>&copy; <?php echo date('Y') ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
+        <footer class="text-small">
+            <p>&copy; <?php echo date('Y'); ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a> <?php echo VERSION; ?>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
             <p>No data saved on servers. Everything is saved on your browser.</p>
         </footer>
     </div>

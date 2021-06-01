@@ -1,7 +1,7 @@
 var text;
 
 function startText(thisVal,id) {
-  console.log(thisVal);
+  //console.log(thisVal);
 
   text = thisVal;
 
