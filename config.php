@@ -7,7 +7,7 @@ if(DEBUG){
     error_reporting(E_ALL);
 }
 
-define('VERSION', 'v1.0.4.012');
+define('VERSION', 'v1.0.4.013');
 
 define("DOC_ROOT", dirname(realpath(__FILE__))."/");
 define("PROCESSES_PATH", DOC_ROOT."processes/");

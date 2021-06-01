@@ -4,7 +4,7 @@ var site_url = window.location;
 function ajaxDirectX({func: func, data: data, silent: silent = false, method:method = 'post', process:process = func+'-process'} = {}){
     if(debug === true)
         console.log('ajax-init~'+process);
-    if(silent === 'No'){
+    if(silent === false){
         var spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
         $('.nav-title').after(spinner);
         $('button, input[type="submit"]').attr('disabled','true');
@@ -29,7 +29,7 @@ function ajaxDirectX({func: func, data: data, silent: silent = false, method:met
                 return;
             }
             dyn_functions[func](json);
-            if(silent === 'No'){
+            if(silent === false){
                 $('button, input[type="submit"]').prop("disabled", false);
                 $('#spinner').remove();
             }

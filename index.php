@@ -122,6 +122,7 @@
                         <div class="col-md-9">
                             <input type="submit" id="submit" value="Generate" class="w-auto p-3">
                             <input type="reset" value="Reset" class="w-auto p-3">
+                            <span class="nav-title"></span>
                         </div>
                         <div class="col-md-3">
                             <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="display-mode">
