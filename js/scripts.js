@@ -95,7 +95,7 @@ dyn_functions['result'] = function (json) {
     const bgColour = $('#background-colour').val();
     if(json.status === 'success') {
         $('.result').show().attr('src', json.image).data('title',title);
-        $('#result').show();
+        $('#result, #publish').show();
         $('html, body').animate({
             scrollTop: $("#result").offset().top
         }, 300);
@@ -173,6 +173,7 @@ function statusChangeCallback(response) {  // Called with the results from FB.ge
     console.log(response);                   // The current login status of the person.
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
         $('#publish').on('click', function () {
+            $(this).hide();
             const title = $('img').data('title');
             testAPI();
         });
