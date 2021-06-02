@@ -129,7 +129,7 @@
                             <span class="nav-title"></span>
                         </div>
                         <div class="col-md-3">
-                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="publish" style="display: none">
+                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="publish" style="display: none !important;">
                                 <i class="lab la-facebook la-2x" style="position: relative; top: -4px;"></i> Publish
                             </div>
                         </div>

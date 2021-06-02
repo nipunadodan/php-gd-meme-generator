@@ -173,7 +173,7 @@ function statusChangeCallback(response) {  // Called with the results from FB.ge
     console.log(response);                   // The current login status of the person.
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
         $('#publish').on('click', function () {
-            $(this).hide();
+            $(this).attr('style','display:block !important');
             const title = $('img').data('title');
             testAPI();
         });
