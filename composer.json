@@ -1,7 +1,9 @@
 {
     "require": {
         "php": "^7.4|^8.0",
-        "stil/gd-text": "^1.1"
+        "stil/gd-text": "^1.1",
+      "ext-json": "*",
+        "ext-gd": "*"
     },
     "name": "nipunadodan/dodanperks",
     "description": "Meme image generated using php-gd according to the inputs"

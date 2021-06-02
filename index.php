@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="css/styles.css" type="text/css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>const site_url = <?php echo SITE_URL; ?></script>
     <style>
         @font-face {
             font-family: Inter;
@@ -56,6 +58,8 @@
             margin-right: 6px;
         }
     </style>
+
+
 </head>
 <body class="dark-mode">
     <div class="container">
@@ -119,10 +123,15 @@
                         </div>
                     </div>
                     <div class="row mt-3 align-content-center">
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <input type="submit" id="submit" value="Generate" class="w-auto p-3">
                             <input type="reset" value="Reset" class="w-auto p-3">
                             <span class="nav-title"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="publish">
+                                <i class="lab la-facebook la-2x" style="position: relative; top: -4px;"></i> Publish
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="display-mode">
@@ -133,16 +142,26 @@
                 </form>
             </div>
             <div class="col-md-6 mt-md-8 mt-5 mb-5" id="result" style="display: none">
-                <img src="" class="result img-fluid" style="display: none">
+                <img src="" id="resultImage" data-title="" class="result img-fluid" style="display: none">
             </div>
         </div>
+
+        <!-- The JS SDK Login Button -->
+
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+
+        <div id="status">
+        </div>
+
         <footer class="text-small">
             <p>&copy; <?php echo date('Y'); ?> <a href="https://nipunadodan.com/">Nipuna Dodantenna</a> <?php echo VERSION; ?>. Special credits for Sinhala Unicode converter for FM fonts <a href="https://projects.malinthe.com/converter/">Malinthe Samarakoon</a> and <a href="http://www.ucsc.cmb.ac.lk/ltrl/services/feconverter/">University of Colombo School of Computing</a></p>
             <p>No data saved on servers. Everything is saved on your browser.</p>
         </footer>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
 <script src="js/lang_converter.js"></script>
 <script src="js/scripts.js"></script>

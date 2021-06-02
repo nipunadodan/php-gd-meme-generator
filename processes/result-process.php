@@ -125,6 +125,7 @@ header("Content-type: text/plain");
 imagepng($im);
 $imagestring = ob_get_contents();
 ob_end_clean();
+imagepng($im,'image.png');
 
 $return = [
     'status' => 'success',

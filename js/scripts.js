@@ -94,11 +94,12 @@ dyn_functions['result'] = function (json) {
     const tagColour = $('#tag-colour').val();
     const bgColour = $('#background-colour').val();
     if(json.status === 'success') {
-        $('.result').show().attr('src', json.image);
+        $('.result').show().attr('src', json.image).data('title',title);
         $('#result').show();
         $('html, body').animate({
             scrollTop: $("#result").offset().top
         }, 300);
+
         localStorage.setItem('gdText-title',title);
         localStorage.setItem('gdText-body',body);
         localStorage.setItem('gdText-lang',lang);
@@ -160,5 +161,91 @@ $(document).ready(function () {
     $('#display-mode').on('click', function (e) {
         e.preventDefault();
         toggleDarkMode();
-    })
-})
+    });
+});
+
+/* ========
+ * FACEBOOK
+ * ======== */
+
+function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    console.log('statusChangeCallback');
+    console.log(response);                   // The current login status of the person.
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+        $('#publish').on('click', function () {
+            const title = $('img').data('title');
+            testAPI();
+        });
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+        document.getElementById('status').innerHTML = 'Please log ' +
+            'into this webpage.';
+    }
+}
+
+
+function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function(response) {   // See the onlogin handler
+        statusChangeCallback(response);
+    });
+}
+
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '2198458126957638',
+        cookie     : true,                     // Enable cookies to allow the server to access the session.
+        xfbml      : true,                     // Parse social plugins on this webpage.
+        version    : 'v10.0'           // Use this Graph API version for this call.
+    });
+
+
+    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+        statusChangeCallback(response);        // Returns the login status.
+    });
+};
+
+
+function testAPI(message) {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    console.log(FB);
+    FB.api('/me', function(response) {
+        console.log(response);
+        document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+
+        $.ajax({
+            url:'https://graph.facebook.com/'+response.id+'/accounts?access_token='+FB.getAccessToken(),
+            method:'GET'
+        }).done(function (res) {
+            console.log(res);
+            var canvas = $("#resultImage").attr('src');
+            //console.log(canvas);
+            //var imageData  = canvas.toDataURL("image/png");
+            try {
+                //blob = dataURItoBlob(imageData);
+                blob = dataURItoBlob(canvas);
+            }
+            catch(e) {
+                console.log(e);
+            }
+            FB.api(
+                '/130471229144380/photos',
+                'POST',
+                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token},
+                function(response) {
+                    console.log(response);
+                }
+            );
+        });
+    });
+}
+
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: 'image/png' });
+}
