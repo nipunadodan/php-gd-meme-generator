@@ -232,7 +232,7 @@ function testAPI(message) {                      // Testing Graph API after logi
             FB.api(
                 '/130471229144380/photos',
                 'POST',
-                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token},
+                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug},
                 function(response) {
                     console.log(response);
                 }
