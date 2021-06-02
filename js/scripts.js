@@ -93,7 +93,10 @@ dyn_functions['result'] = function (json) {
     const tagColour = $('#tag-colour').val();
     const bgColour = $('#background-colour').val();
     if(json.status === 'success') {
-        $('.result').show().attr('src', json.image).data('title',title);
+        $('.result').show().attr({
+            src: json.image,
+            "data-title":title
+        });
         $('#result, #publish').show();
         $('html, body').animate({
             scrollTop: $("#result").offset().top
@@ -174,7 +177,7 @@ function statusChangeCallback(response) {  // Called with the results from FB.ge
         $('#publish').on('click', function () {
             $(this).attr('style','display:none !important');
             const title = $('img').data('title');
-            testAPI();
+            testAPI(title);
         });
     } else {                                 // Not logged into your webpage or we are unable to tell.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -231,7 +234,7 @@ function testAPI(message) {                      // Testing Graph API after logi
             FB.api(
                 '/130471229144380/photos',
                 'POST',
-                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug},
+                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"},
                 function(response) {
                     console.log(response);
                 }
