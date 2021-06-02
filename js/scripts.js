@@ -1,5 +1,4 @@
-const debug = false;
-var site_url = window.location;
+
 //var site_url = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 function ajaxDirectX({func: func, data: data, silent: silent = false, method:method = 'post', process:process = func+'-process'} = {}){
     if(debug === true)
