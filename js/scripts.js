@@ -250,7 +250,9 @@ function testAPI(message) {
                 function(response) {
                     console.log(response);
                     if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
-                        responseModal('Successfully posted');
+                        responseModal('success','Successfully posted');
+                    }else{
+                        responseModal('danger','Error in posting');
                     }
                 }
             );
