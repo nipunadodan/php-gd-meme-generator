@@ -45,6 +45,16 @@ function ajaxDirectX({func: func, data: data, silent: silent = false, method:met
     return false;
 }
 
+function responseModal(status, message){
+    $('#response-modal .modal-content').attr('class','modal-content border-0 bg-'+status);
+    $('#response-modal #response-modal-title').html(status);
+    $('#response-modal #response-modal-icon').attr('class', icons[status]);
+    $('#response-modal .modal-body').html("<span class=''>"+message.replace(/!/g, "")+"</span>");
+    $('#response-modal').modal('toggle');
+    if(debug === true)
+        console.log(icons[status]);
+}
+
 $('form').submit(function (e) {
     e.preventDefault();
     ajaxDirectX({
@@ -170,23 +180,31 @@ $(document).ready(function () {
  * FACEBOOK
  * ======== */
 
-function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    console.log('statusChangeCallback');
-    console.log(response);                   // The current login status of the person.
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        $('body').unbind('click').on('click', '#publish', function () {
-            $(this).attr('style','display:none !important');
-            const title = $('img').data('title');
-            testAPI(title);
-        });
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-        document.getElementById('status').innerHTML = 'Please log ' +
-            'into this webpage.';
+function statusChangeCallback(response) {
+    // Called with the results from FB.getLoginStatus().
+    if(debug) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The current login status of the person.
     }
+    $('body').unbind('click').on('click', '#publish', function () {
+        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+            const yes = confirm('Are you sure want to post to Facebbok?');
+            if(yes) {
+                $(this).attr('style', 'display:none !important');
+                const title = $('img').data('title');
+                testAPI(title);
+            }
+        } else {
+            // Not logged into your webpage or we are unable to tell.
+            responseModal('warning', 'Please login to Facebook');
+        }
+    });
 }
 
 
-function checkLoginState() {               // Called when a person is finished with the Login Button.
+function checkLoginState() {
+    // Called when a person is finished with the Login Button.
     FB.getLoginStatus(function(response) {   // See the onlogin handler
         statusChangeCallback(response);
     });
@@ -208,47 +226,32 @@ window.fbAsyncInit = function() {
 };
 
 
-function testAPI(message) {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    console.log(FB);
+function testAPI(message) {
+    // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+
     FB.api('/me', function(response) {
         console.log(response);
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
+
+        let params = {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
 
         $.ajax({
             url:'https://graph.facebook.com/'+response.id+'/accounts?access_token='+FB.getAccessToken(),
             method:'GET'
         }).done(function (res) {
             console.log(res);
-            var canvas = $("#resultImage").attr('src');
-            //console.log(canvas);
-            //var imageData  = canvas.toDataURL("image/png");
-            try {
-                //blob = dataURItoBlob(imageData);
-                blob = dataURItoBlob(canvas);
-            }
-            catch(e) {
-                console.log(e);
-            }
             FB.api(
                 '/130471229144380/photos',
                 'POST',
-                {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"},
+                params,
                 function(response) {
                     console.log(response);
+                    if(response.hasOwnProperty('post_id')){
+                        responseModal('Successfully posted');
+                    }
                 }
             );
         });
     });
-}
-
-function dataURItoBlob(dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ab], { type: 'image/png' });
 }

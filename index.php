@@ -126,18 +126,18 @@
                         </div>
                     </div>
                     <div class="row mt-3 align-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-7">
                             <input type="submit" id="submit" value="Generate" class="w-auto p-3">
                             <input type="reset" value="Reset" class="w-auto p-3">
                             <span class="nav-title"></span>
                         </div>
-                        <div class="col-md-3">
-                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="publish" style="display: none !important;">
-                                <i class="lab la-facebook la-2x" style="position: relative; top: -4px;"></i> Publish
-                            </div>
+                        <div class="col-md-3 col-5">
+                            <du class="h-100 d-flex align-content-center flex-wrap cursor-pointer">
+                                <button class="btn btn-outline-secondary" id="publish" style="display: none !important;"><i class="lab la-facebook la-2x"></i> Publish</button>
+                            </du>
                         </div>
                         <div class="col-md-3">
-                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer" id="display-mode">
+                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer mt-4 mt-md-0" id="display-mode">
                                 <i class="las la-adjust la-2x"></i> Light/Dark
                             </div>
                         </div>
@@ -151,8 +151,10 @@
 
         <!-- The JS SDK Login Button -->
 
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
+        <div class="my-3">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+        </div>
 
         <div id="status">
         </div>
@@ -163,6 +165,24 @@
         </footer>
     </div>
 
+    <!-- Response Modal -->
+    <div class="modal fade" id="response-modal" tabindex="-1" role="dialog" aria-labelledby="responseModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered border-0" role="document">
+            <div class="modal-content border-0 ">
+                <div class="modal-header d-block border-0 pt-5">
+                    <div class="text-center">
+                        <i class="" id="response-modal-icon"></i>
+                        <span class="text-bold text-capitalize" id="response-modal-title"></span>
+                    </div>
+                </div>
+                <div class="modal-body text-center text-small">
+                </div>
+                <div class="modal-footer border-0 p-0 mt-3">
+                    <button type="button" id="response-modal-okay" class="btn btn-light text-small text-uppercase w-100 rounded-0 rounded-bottom py-3 m-0" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
