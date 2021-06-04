@@ -249,7 +249,7 @@ function testAPI(message) {
                 params,
                 function(response) {
                     console.log(response);
-                    if(response.hasOwnProperty('post_id')){
+                    if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
                         responseModal('Successfully posted');
                     }
                 }
