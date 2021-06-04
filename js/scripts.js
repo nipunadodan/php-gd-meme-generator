@@ -235,7 +235,7 @@ function testAPI(message) {
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
 
-        let params = {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
+        let params = {"url":site_url+'image.png',"caption":message,"access_token":response.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
 
         $.ajax({
             url:'https://graph.facebook.com/'+response.id+'/accounts?access_token='+FB.getAccessToken(),
