@@ -45,6 +45,12 @@ function ajaxDirectX({func: func, data: data, silent: silent = false, method:met
     return false;
 }
 
+var icons = {
+    'success' : 'la la-check-circle',
+    'danger' : 'la la-times-circle',
+    'info' : 'la la-info-circle',
+    'warning' : 'la la-exclamation-triangle'
+};
 function responseModal(status, message){
     $('#response-modal .modal-content').attr('class','modal-content border-0 bg-'+status);
     $('#response-modal #response-modal-title').html(status);
