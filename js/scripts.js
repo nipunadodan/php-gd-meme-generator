@@ -231,17 +231,18 @@ function testAPI(message) {
     // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 
     FB.api('/me', function(response) {
+        console.log('me');
         console.log(response);
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
-
-        let params = {"url":site_url+'image.png',"caption":message,"access_token":response.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
 
         $.ajax({
             url:'https://graph.facebook.com/'+response.id+'/accounts?access_token='+FB.getAccessToken(),
             method:'GET'
         }).done(function (res) {
             console.log(res);
+
+            let params = {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
             FB.api(
                 '/130471229144380/photos',
                 'POST',
