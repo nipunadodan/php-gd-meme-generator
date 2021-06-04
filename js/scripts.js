@@ -187,7 +187,8 @@ function statusChangeCallback(response) {
         console.log(response);
         // The current login status of the person.
     }
-    $('body').unbind('click').on('click', '#publish', function () {
+    $('body').unbind('click').on('click', '#publish', function (ex) {
+        ex.preventDefault();
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
             const yes = confirm('Are you sure want to post to Facebbok?');
             if(yes) {
