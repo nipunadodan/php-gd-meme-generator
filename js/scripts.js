@@ -201,7 +201,7 @@ function statusChangeCallback(response) {
                 $(this).attr('style', 'display:none !important');
                 const title = $('img').data('title');
                 const tag = $('#tag').val();
-                testAPI(title+'\n\n'+tag);
+                testAPI(title+'\n\n#'+tag);
             }
         } else {
             // Not logged into your webpage or we are unable to tell.
