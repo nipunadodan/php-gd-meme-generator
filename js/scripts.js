@@ -196,11 +196,12 @@ function statusChangeCallback(response) {
     $('body').unbind('click').on('click', '#publish', function (ex) {
         ex.preventDefault();
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            const yes = confirm('Are you sure want to post to Facebbok?');
+            const yes = confirm('Are you sure want to post to Facebook?');
             if(yes) {
                 $(this).attr('style', 'display:none !important');
                 const title = $('img').data('title');
-                testAPI(title);
+                const tag = $('#tag').val();
+                testAPI(title+'\n\n'+tag);
             }
         } else {
             // Not logged into your webpage or we are unable to tell.

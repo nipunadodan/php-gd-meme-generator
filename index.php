@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="col-md-9">
                             <label>Tag</label>
-                            <input name="tag" placeholder="Tag" value="dodanperks" class="dark-mode" style="font-weight: normal" />
+                            <input name="tag" id="tag" placeholder="Tag" value="dodanperks" class="dark-mode" style="font-weight: normal" />
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
