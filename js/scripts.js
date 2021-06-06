@@ -202,6 +202,10 @@ function statusChangeCallback(response) {
                 const title = $('img').data('title');
                 const tag = $('#tag').val();
                 testAPI(title+'\n\n#'+tag);
+
+                var spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
+                $('.nav-title').after(spinner);
+                $('button, input[type="submit"]').attr('disabled','true');
             }
         } else {
             // Not logged into your webpage or we are unable to tell.
@@ -258,6 +262,8 @@ function testAPI(message) {
                     console.log(response);
                     if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
                         responseModal('success','Successfully posted');
+                        $('button, input[type="submit"]').prop("disabled", false);
+                        $('#spinner').remove();
                     }else{
                         responseModal('danger','Error in posting');
                     }
