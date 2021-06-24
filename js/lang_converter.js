@@ -371,7 +371,7 @@ function startText(thisVal,id) {
   text = text.replace(/ඡී/g, 'Â');
   text = text.replace(/ඛ්/g, 'Ä');
   text = text.replace(/ඛි/g, 'Å');
-  text = text.replace(/ලු/g, '¨‍');
+  text = text.replace(/ලු/g, '¨');
   text = text.replace(/ඛී/g, 'Ç');
   text = text.replace(/දි/g, 'È');
   text = text.replace(/ච්/g, 'É');
