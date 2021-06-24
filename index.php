@@ -70,7 +70,7 @@
         <div class="row align-content-center min-vh-100">
             <div class="col-md-6">
                 <h1 style="font-weight: bolder" class="display-1 mt-5">#dodanperks</h1>
-                <form class="form" name="result" method="post" action="test/result.php">
+                <form enctype="multipart/form-data" class="form" name="result" method="post" action="test/result.php">
                     <div class="row">
                         <div class="col-md-9">
                             <label>Language</label>
@@ -121,7 +121,11 @@
                             <label>Height</label>
                             <input name="height" type="number" placeholder="Height" value="1200" class="dark-mode" style="font-weight: normal" />
                         </div>
-                        <div class="col-md-3 offset-md-3">
+                        <div class="col-md-3">
+                            <label>Image</label>
+                            <input name="bg_image" type="file" class="dark-mode" style="font-weight: normal" />
+                        </div>
+                        <div class="col-md-3">
                             <label>Colour</label>
                             <input class="color-picker" name="background-colour" id="background-colour" value='#313131' />
                         </div>

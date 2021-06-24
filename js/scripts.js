@@ -13,17 +13,20 @@ function ajaxDirectX({func: func, data: data, silent: silent = false, method:met
         data: data,
         type: method,
         url: site_url + 'ajax.php?process=' + process,
+        processData: false,
+        contentType: false,
         success: function (response) {
+            let json;
             try {
-                var json = JSON.parse(response);
+                json = JSON.parse(response);
             } catch (e) {
-                var json = response;
+                json = response;
             }
 
             if(debug === true)
                 console.log(json);
 
-            if(json.status === 'sessionexired'){
+            if(json.status === 'session_expired'){
                 location.reload();
                 return;
             }
@@ -63,9 +66,10 @@ function responseModal(status, message){
 
 $('form').submit(function (e) {
     e.preventDefault();
+    const form = new FormData($(this)[0]);
     ajaxDirectX({
         func:'result',
-        data:$(this).serialize()
+        data:form
     })
 });
 
@@ -104,6 +108,7 @@ dyn_functions['result'] = function (json) {
     const title = $('#title').val();
     const body = $('#body').val();
     const lang = $('#lang').val();
+    const tag = $('#tag').val();
     const titleColour = $('#title-colour').val();
     const bodyColour = $('#body-colour').val();
     const tagColour = $('#tag-colour').val();
@@ -121,6 +126,7 @@ dyn_functions['result'] = function (json) {
         localStorage.setItem('gdText-title',title);
         localStorage.setItem('gdText-body',body);
         localStorage.setItem('gdText-lang',lang);
+        localStorage.setItem('gdText-tag',tag);
         localStorage.setItem('gdText-title-colour',titleColour);
         localStorage.setItem('gdText-body-colour',bodyColour);
         localStorage.setItem('gdText-tag-colour',tagColour);
@@ -138,6 +144,9 @@ $(document).ready(function () {
     }
     if(localStorage.getItem('gdText-lang') !== null){
         $('#lang').val(localStorage.getItem('gdText-lang'));
+    }
+    if(localStorage.getItem('gdText-tag') !== null){
+        $('#tag').val(localStorage.getItem('gdText-tag'));
     }
     if(localStorage.getItem('gdText-title-colour') !== null) {
         $('#title-colour').val(localStorage.getItem('gdText-title-colour'));

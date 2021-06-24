@@ -40,6 +40,31 @@ $height = isset($_POST['height']) && $_POST['height'] !== '' ? intval($_POST['he
 $backColour = isset($_POST['background-colour']) && $_POST['background-colour'] !== '' ? hexToRgb($_POST['background-colour']) : hexToRgb('#00203F');
 $lang = isset($_POST['lang']) && $_POST['lang'] !== '' ? $_POST['lang'] : 'en';
 
+if(!empty($_FILES['bg_image']['name'])){
+    $path = "img/";
+    //$path = $path . basename( $_FILES['uploaded_file']['name']);
+    $filename = basename( $_FILES['bg_image']['name']);
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $path = $path . 'image.'.$ext;
+    $mime = getimagesize($path);
+
+    if(move_uploaded_file($_FILES['bg_image']['tmp_name'], $path)) {
+        //echo "The file ".  basename( $_FILES['uploaded_file']['name'])." has been uploaded";
+        $bg_image_upload = 'uploaded';
+        if($mime['mime']=='image/png') {
+            $im = imagecreatefrompng($path);
+        }
+        if($mime['mime']=='image/jpg' || $mime['mime']=='image/jpeg' || $mime['mime']=='image/pjpeg') {
+            $im = imagecreatefromjpeg($path);
+        }
+    } else{
+        $bg_image_upload = 'error uploading';
+        echo "There was an error uploading the file, please try again!";
+    }
+}else{
+    $bg_image_upload = 'No background image';
+    $im = imagecreatetruecolor($width, $height);
+}
 
 /*
  * =================
@@ -47,7 +72,40 @@ $lang = isset($_POST['lang']) && $_POST['lang'] !== '' ? $_POST['lang'] : 'en';
  * =================
  * */
 
-$im = imagecreatetruecolor($width, $height);
+
+$w = imagesx($im);
+$h = imagesy($im);
+$w_new = $width;
+$h_new = $height;
+if($w < $h)
+{
+    $thumb_w    =   $w_new;
+    $thumb_h    =   $h*($w_new/$w);
+}
+
+if($w > $h)
+{
+    $thumb_w    =   $w*($h_new/$h);
+    $thumb_h    =   $h_new;
+}
+
+if($w == $h)
+{
+    $thumb_w    =   $w_new;
+    $thumb_h    =   $h_new;
+}
+
+
+//imagesavealpha($im, true);
+$img2 = imagecreatetruecolor($w, $h);
+imagefill($img2, 0, 0, imagecolorallocatealpha($im, 0x00, 0x00, 0x00, 80));
+
+imagecopy($im, $img2, 0, 0, 0, 0, $w, $h);
+
+$img3 = imagecreatetruecolor($thumb_w,$thumb_h);
+imagecopyresampled($img3,$im,0,0,0,0,$thumb_w,$thumb_h,$w,$h);
+
+$im = $img3;
 $backgroundColor = imagecolorallocate($im, $backColour[0], $backColour[1], $backColour[2]);
 //$backgroundColor = imagecolorallocate($im, 55, 55, 55);
 imagefill($im, 0, 0, $backgroundColor);
@@ -64,8 +122,8 @@ $box->setTextAlign('left', 'top');*/
 
 $box = new Box($im);
 if($lang == 'en') {
-//$box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Black.ttf');
-    $box->setFontFace(DOC_ROOT . '/fonts/Oswald/Oswald-Bold.ttf');
+    $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Black.ttf');
+//    $box->setFontFace(DOC_ROOT . '/fonts/Oswald/Oswald-Bold.ttf');
 }else{
     $box->setFontFace(DOC_ROOT . '/fonts/Ganganee.ttf');
 }
@@ -124,13 +182,31 @@ ob_start();
 header("Content-type: text/plain");
 imagepng($im);
 $imagestring = ob_get_contents();
+if(isset($path)){
+    unlink($path);
+}
 ob_end_clean();
 imagepng($im,'image.png');
 
 $return = [
     'status' => 'success',
     'image' => 'data:image/png;base64, '.base64_encode($imagestring),
-    'message' => 'Successfully created the image'
+    'message' => 'Successfully created the image',
+    'background' => $bg_image_upload,
+    /*'dimensions' => [
+        'get' => [
+            'width' => $width,
+            'height' => $height,
+        ],
+        'calculated' => [
+            'width' => $thumb_w,
+            'height' => $thumb_h,
+        ],
+        'image' => [
+            'width' => $w,
+            'height' => $h,
+        ]
+    ]*/
 ];
 echo json_encode($return);
 imagedestroy($im);
