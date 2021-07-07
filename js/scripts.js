@@ -286,6 +286,7 @@ function testAPI(message) {
 $(document).ready(function () {
     $('label+i').on('click', function () {
         const id = $(this).attr('id');
+        $(this).toggleClass('la-gear la-times');
         $('#'+id+'-container').toggle();
     })
 })
