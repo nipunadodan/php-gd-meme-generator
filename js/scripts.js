@@ -238,7 +238,7 @@ window.fbAsyncInit = function() {
         appId      : '2198458126957638',
         cookie     : true,                     // Enable cookies to allow the server to access the session.
         xfbml      : true,                     // Parse social plugins on this webpage.
-        version    : 'v10.0'           // Use this Graph API version for this call.
+        version    : 'v11.0'           // Use this Graph API version for this call. Prev v10.0
     });
 
 
@@ -277,7 +277,7 @@ function testAPI(message) {
 
             if(nature === "schedule"){
                 params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
-                params.unpublished_content_type = "SCHEDULED";
+                //params.unpublished_content_type = "SCHEDULED";
             }else if(nature === "draft"){
                 params.unpublished_content_type = "DRAFT";
             }
