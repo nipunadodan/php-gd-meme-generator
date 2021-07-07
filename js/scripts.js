@@ -119,7 +119,7 @@ dyn_functions['result'] = function (json) {
             src: json.image,
             "data-title":title
         });
-        $('#result, #publish').show();
+        $('#result, #facebook-publishing').show();
         $('html, body').animate({
             scrollTop: $("#result").offset().top
         }, 300);
@@ -203,7 +203,7 @@ function statusChangeCallback(response) {
         console.log(response);
         // The current login status of the person.
     }
-    $('body').unbind('click').on('click', '#publish', function (ex) {
+    $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
         ex.preventDefault();
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
             const yes = confirm('Are you sure want to post to Facebook?');
@@ -263,7 +263,18 @@ function testAPI(message) {
         }).done(function (res) {
             console.log(res);
 
-            let params = {"url":site_url+'image.png',"caption":message,"access_token":res.data[0].access_token, "published": !debug, "unpublished_content_type":"DRAFT"};
+            const nature = $('input[name="nature"]').val();
+            const scheduledTime = $('input[name="schedule-datetime"]').val();
+
+            let params = {
+                "url":site_url+'image.png',
+                "caption":message,
+                "access_token":res.data[0].access_token,
+                "published": (nature === 'publish'),
+                "unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
+                "scheduled_publish_time":(scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '')
+            };
+
             FB.api(
                 '/130471229144380/photos',
                 'POST',

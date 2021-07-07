@@ -66,7 +66,7 @@
             border: none !important;
             padding: 0;
         }
-        #display-mode i{
+        #display-mode i, #post-to-facebook i{
             position: relative;
             top: -4px;
             margin-right: 6px;
@@ -131,8 +131,8 @@
                             <div id="body-settings-container" class="bg-secondary rounded px-2 pt-0 pb-3 pb-md-2 mt-2 settings-container" style="display: none">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Lines</label>
-                                        <input type="number" id="body-lines" name="body-lines" placeholder="Lines" class="dark-mode" value="1" style="font-weight: normal" />
+                                        <label>Opacity (%)</label>
+                                        <input type="number" id="body-opacity" name="body-opacity" placeholder="Opacity" class="dark-mode" value="60" style="font-weight: normal" />
                                     </div>
                                     <div class="col-md-4">
                                         <label class="text-small">Font Size</label>
@@ -184,29 +184,42 @@
                             <input type="reset" value="Reset" class="w-auto p-3">
                             <span class="nav-title"></span>
                         </div>
-                        <div class="col-md-3 col-5">
-                            <du class="h-100 d-flex align-content-center flex-wrap cursor-pointer">
-                                <button class="btn btn-outline-secondary" id="publish" style="display: none !important;"><i class="lab la-facebook la-2x"></i> Publish</button>
-                            </du>
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 offset-md-3">
                             <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer mt-4 mt-md-0" id="display-mode">
                                 <i class="las la-adjust la-2x"></i> Light/Dark
                             </div>
                         </div>
                     </div>
                 </form>
+                <div class="row" id="facebook-publishing" style="display: none">
+                    <div class="col-md-6">
+                        <label class="d-block w-100">Publishing Settings</label>
+                        <input name="nature" value="schedule" type="radio" class="form-check-input" id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>
+                        <input name="nature" value="draft" type="radio" class="form-check-input" id="draft" checked><label for="draft" class="d-inline ms-2">Draft</label>
+                        <input name="nature" value="publish" type="radio" class="form-check-input" id="publish"><label for="publish" class="d-inline ms-2">Publish</label>
+                    </div>
+                    <div class="col-md-6 form">
+                        <label for="date">Date</label>
+                        <input type="datetime-local" name="schedule-datetime">
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-3">
+                        <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer mt-4 mt-md-0" id="post-to-facebook">
+                            <i class="lab la-facebook la-2x"></i> Publish
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                        </fb:login-button>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 mt-md-8 mt-5 mb-5" id="result" style="display: none">
                 <img src="" id="resultImage" data-title="" class="result img-fluid" style="display: none">
             </div>
-        </div>
-
-        <!-- The JS SDK Login Button -->
-
-        <div class="my-3">
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
         </div>
 
         <div id="status">

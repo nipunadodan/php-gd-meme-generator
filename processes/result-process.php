@@ -44,7 +44,7 @@ $titleLines = isset($_POST['title-lines']) && $_POST['title-lines'] !== '' ? $_P
 $titleFontSize = isset($_POST['title-font-size']) && $_POST['title-font-size'] !== '' ? $_POST['title-font-size'] : 100;
 $titlePositionY = isset($_POST['title-position-y']) && $_POST['title-position-y'] !== '' ? $_POST['title-position-y'] : 280;
 
-$bodyLines = isset($_POST['body-lines']) && $_POST['body-lines'] !== '' ? $_POST['body-lines'] : 1;
+$bodyOpacity = isset($_POST['body-opacity']) && $_POST['body-opacity'] !== '' ? $_POST['body-opacity'] : 1;
 $bodyFontSize = isset($_POST['body-font-size']) && $_POST['body-font-size'] !== '' ? $_POST['body-font-size'] : 45;
 if(isset($_POST['body-position-y']) && $_POST['body-position-y'] == 515 && $titleLines == 2){
     $bodyPositionY = 615;
@@ -112,7 +112,7 @@ if($w == $h)
 
 //imagesavealpha($im, true);
 $img2 = imagecreatetruecolor($w, $h);
-imagefill($img2, 0, 0, imagecolorallocatealpha($im, 0x00, 0x00, 0x00, 80));
+imagefill($img2, 0, 0, imagecolorallocatealpha($im, 0x00, 0x00, 0x00, $bodyOpacity));
 
 imagecopy($im, $img2, 0, 0, 0, 0, $w, $h);
 
@@ -143,7 +143,7 @@ if($lang == 'en') {
 $box->setFontSize($titleFontSize);
 $box->setFontColor($titleColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, $titlePositionY, 1200, 460);
+$box->setBox(150, $titlePositionY, intval($thumb_w)-300, 460);
 $box->setTextAlign('left', 'top');
 $box->draw($title);
 
@@ -157,7 +157,7 @@ if($lang == 'en') {
 $box->setFontSize($bodyFontSize);
 $box->setFontColor($bodyColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, $bodyPositionY, 1100, 1060);
+$box->setBox(150, $bodyPositionY, intval($thumb_w)-300, 1060);
 $box->setTextAlign('left', 'top');
 $box->draw($body);
 
@@ -195,7 +195,7 @@ $return = [
     'image' => 'data:image/png;base64, '.base64_encode($imagestring),
     'message' => 'Successfully created the image',
     'background' => $bg_image_upload,
-    /*'dimensions' => [
+    'dimensions' => [
         'get' => [
             'width' => $width,
             'height' => $height,
@@ -208,7 +208,7 @@ $return = [
             'width' => $w,
             'height' => $h,
         ]
-    ]*/
+    ]
 ];
 echo json_encode($return);
 imagedestroy($im);
