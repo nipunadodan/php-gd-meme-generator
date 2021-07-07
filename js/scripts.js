@@ -277,8 +277,9 @@ function testAPI(message) {
 
             if(nature === "schedule"){
                 params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
-            }else if(nature === "draft" || nature === "schedule"){
-                params.unpublished_content_type = (nature === "schedule" ? "SCHEDULED" : "DRAFT")
+                params.unpublished_content_type = "SCHEDULED";
+            }else if(nature === "draft"){
+                params.unpublished_content_type = "DRAFT";
             }
 
             console.log(nature);
