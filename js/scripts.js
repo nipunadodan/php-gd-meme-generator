@@ -271,12 +271,16 @@ function testAPI(message) {
                 "caption":message,
                 "access_token":res.data[0].access_token,
                 "published": (nature === 'publish'),
-                "unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
+                //"unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
             };
 
             if(nature === "schedule"){
                 params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
+            }else if(nature === "draft" || nature === "schedule"){
+                params.unpublished_content_type = (nature === "schedule" ? "SCHEDULED" : "DRAFT")
             }
+
+            console.log(params);
 
             FB.api(
                 '/130471229144380/photos',
