@@ -1,9 +1,6 @@
-var text;
-
 function startText(thisVal,id) {
-  //console.log(thisVal);
 
-  text = thisVal;
+  let text = thisVal;
 
   text = text.replace(/ද්‍ර/g, 'ø');
   text = text.replace(/,/g, '￦');
@@ -541,11 +538,11 @@ function startText(thisVal,id) {
   text = text.replace(/`ca/g, '`Ê');
   text = text.replace(/`cs/g, '`ð');
 
-  $('#'+id+'_').val(text);
+  document.getElementById(id+'_').value = text;
 }
 
 function copyText() {
-  var copyText = $('#abhaya');
+  const copyText = document.getElementById('abhaya');
   copyText.select();
   document.execCommand('copy');
 }

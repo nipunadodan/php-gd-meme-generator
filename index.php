@@ -39,9 +39,18 @@
             font-weight: 300;
         }
         label{
-            display: block;
+            display: inline-block;
             font-size: 1rem !important;
             margin: 15px 0 7px !important;
+        }
+        label+i{
+            float: right;
+            margin: 15px 0 7px !important;
+            position: relative;
+            top: 2px;
+        }
+        .settings-container label{
+            font-size: 0.8rem !important;
         }
         input, textarea{
             font-size: 1rem !important;
@@ -80,22 +89,60 @@
                             </select>
                         </div>
                     </div>
+
+                    <!-- TITLE -->
                     <div class="row">
                         <div class="col-md-9">
-                            <label>Title</label>
+                            <label>Title</label><i class="la la-gear cursor-pointer" id="title-settings"></i>
                             <input id="title" name="title" placeholder="Title" class="dark-mode" style="font-weight: normal" />
                             <input type="hidden" name="title_" id="title_">
+
+                            <div id="title-settings-container" class="bg-secondary rounded p-2 mt-2 settings-container" style="display: none">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Lines</label>
+                                        <input type="number" id="title-lines" name="title-lines" placeholder="Lines" class="dark-mode" value="1" style="font-weight: normal" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Font Size</label>
+                                        <input type="number" id="title-font-size" name="title-font-size" placeholder="Font Size" class="dark-mode" value="100" style="font-weight: normal" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Position Y</label>
+                                        <input type="number" id="title-position-y" name="title-position-y" placeholder="Position Y" class="dark-mode" value="280" style="font-weight: normal" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
                             <input class="color-picker" name="title-colour" id="title-colour" value='#f89a1f' />
                         </div>
                     </div>
+
+                    <!-- BODY -->
                     <div class="row">
                         <div class="col-md-9">
-                            <label>Body</label>
+                            <label>Body</label><i class="la la-gear cursor-pointer" id="body-settings"></i>
                             <textarea id="body" name="body" placeholder="Body" class="dark-mode" style="font-weight: normal"></textarea>
                             <input type="hidden" name="body_" id="body_">
+
+                            <div id="body-settings-container" class="bg-secondary rounded p-2 mt-2 settings-container" style="display: none">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Lines</label>
+                                        <input type="number" id="body-lines" name="body-lines" placeholder="Lines" class="dark-mode" value="1" style="font-weight: normal" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="text-small">Font Size</label>
+                                        <input type="number" id="body-font-size" name="body-font-size" placeholder="Font Size" class="dark-mode" value="45" style="font-weight: normal" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Position Y</label>
+                                        <input type="number" id="body-position-y" name="body-position-y" placeholder="Position Y" class="dark-mode" value="515" style="font-weight: normal" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>

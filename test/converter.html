@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Sinhala Unicode Converter</title>
+        <style>
+            label{
+                display: block;
+            }
+            textarea{
+                min-height: 200px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <label for="input_text">Input</label>
+            <textarea id="input_text"></textarea>
+        </div>
+        <div>
+            <label for="result">Output</label>
+            <textarea id="result"></textarea>
+        </div>
+
+        <script src="converter.js"></script>
+        <script>
+            const log = document.getElementById('input_text');
+
+            document.addEventListener('keyup', function () {
+                document.getElementById("result").value = convertText(log.value);
+            });
+        </script>
+    </body>
+</html>

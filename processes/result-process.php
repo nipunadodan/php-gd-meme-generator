@@ -40,6 +40,20 @@ $height = isset($_POST['height']) && $_POST['height'] !== '' ? intval($_POST['he
 $backColour = isset($_POST['background-colour']) && $_POST['background-colour'] !== '' ? hexToRgb($_POST['background-colour']) : hexToRgb('#00203F');
 $lang = isset($_POST['lang']) && $_POST['lang'] !== '' ? $_POST['lang'] : 'en';
 
+$titleLines = isset($_POST['title-lines']) && $_POST['title-lines'] !== '' ? $_POST['title-lines'] : 1;
+$titleFontSize = isset($_POST['title-font-size']) && $_POST['title-font-size'] !== '' ? $_POST['title-font-size'] : 100;
+$titlePositionY = isset($_POST['title-position-y']) && $_POST['title-position-y'] !== '' ? $_POST['title-position-y'] : 280;
+
+$bodyLines = isset($_POST['body-lines']) && $_POST['body-lines'] !== '' ? $_POST['body-lines'] : 1;
+$bodyFontSize = isset($_POST['body-font-size']) && $_POST['body-font-size'] !== '' ? $_POST['body-font-size'] : 45;
+if(isset($_POST['body-position-y']) && $_POST['body-position-y'] == 515 && $titleLines == 2){
+    $bodyPositionY = 615;
+}elseif (isset($_POST['body-position-y']) && $_POST['body-position-y'] !== ''){
+    $bodyPositionY = $_POST['body-position-y'];
+}else{
+    $bodyPositionY = 515;
+}
+
 if(!empty($_FILES['bg_image']['name'])){
     $path = "img/";
     //$path = $path . basename( $_FILES['uploaded_file']['name']);
@@ -114,12 +128,11 @@ imagefill($im, 0, 0, $backgroundColor);
 $box->setFontFace(DOC_ROOT.'/fonts/lineawesome/la-regular-400.ttf'); // http://www.dafont.com/prisma.font
 $box->setFontSize(130);
 $box->setFontColor(hexToColor(isset($_POST['title-colour']) && $_POST['title-colour'] !== '' ? $_POST['title-colour'] : '#ffff8c')); //#ff4b8c - new Color(255, 75, 140)
-//$box->setFontColor(new Color(255, 255, 255));
-//$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
 $box->setBox(120, 120, 1200, 460);
-$box->setTextAlign('left', 'top');*/
-//$box->draw('&#xf0eb;');
+$box->setTextAlign('left', 'top');
+$box->draw('&#xf0eb;');*/
 
+/* TITLE */
 $box = new Box($im);
 if($lang == 'en') {
     $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Black.ttf');
@@ -127,29 +140,30 @@ if($lang == 'en') {
 }else{
     $box->setFontFace(DOC_ROOT . '/fonts/Ganganee.ttf');
 }
-$box->setFontSize(100);
+$box->setFontSize($titleFontSize);
 $box->setFontColor($titleColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, 280, 1200, 460);
+$box->setBox(150, $titlePositionY, 1200, 460);
 $box->setTextAlign('left', 'top');
 $box->draw($title);
 
+/* BODY */
 $box = new Box($im);
 if($lang == 'en') {
     $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-Regular.ttf');
 }else{
     $box->setFontFace(DOC_ROOT . '/fonts/Malithi.ttf');
 }
-$box->setFontSize(45);
+$box->setFontSize($bodyFontSize);
 $box->setFontColor($bodyColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 0, -2);
-$box->setBox(150, 515, 1100, 1060);
+$box->setBox(150, $bodyPositionY, 1100, 1060);
 $box->setTextAlign('left', 'top');
 $box->draw($body);
 
+/* TAG_HASH */
 $box = new Box($im);
 $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-ExtraBold.ttf');
-
 $box->setFontColor($titleColour);
 //$box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
 $box->setFontSize(50);
@@ -158,6 +172,7 @@ $box->setTextAlign('left', 'bottom');
 //$box->setBackgroundColor(new Color(255, 75, 140));
 $box->draw('#');
 
+/* TAG */
 $box = new Box($im);
 $box->setFontFace(DOC_ROOT . '/fonts/Inter/Inter-ExtraBold.ttf');
 $box->setFontColor($tagColour);
@@ -168,23 +183,10 @@ $box->setTextAlign('left', 'bottom');
 //$box->setBackgroundColor(new Color(255, 75, 140));
 $box->draw($tag);
 
-/*$box = new Box($im);
-$box->setFontFace(DOC_ROOT.'/fonts/Abhaya_Libre/AbhayaLibre-Bold.ttf'); // http://www.dafont.com/franchise.font
-$box->setFontColor(new Color(230, 230, 230));
-//$box->setTextShadow(new Color(0, 0, 0, 50), 2, 2);
-$box->setFontSize(60);
-$box->setBox(530, 200, 1200, 800);
-$box->setTextAlign('left', 'bottom');
-$box->setBackgroundColor(new Color(255, 75, 140));
-$box->draw("#හදවතින්මලාංකිකයි");*/
-
 ob_start();
 header("Content-type: text/plain");
 imagepng($im);
 $imagestring = ob_get_contents();
-if(isset($path)){
-    unlink($path);
-}
 ob_end_clean();
 imagepng($im,'image.png');
 
