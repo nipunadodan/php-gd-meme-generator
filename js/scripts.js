@@ -275,9 +275,7 @@ function testAPI(message) {
             };
 
             if(nature === "schedule"){
-                params.push({
-                    "scheduled_publish_time":(scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '')
-                })
+                params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
             }
 
             FB.api(
