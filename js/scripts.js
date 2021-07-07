@@ -264,7 +264,8 @@ function testAPI(message) {
             console.log(res);
 
             const nature = $('input[name="nature"]:checked').val();
-            const scheduledTime = $('input[name="schedule-datetime"]').val();
+            let scheduledTime = $('input[name="schedule-datetime"]').val();
+            scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
 
             let params = {
                 "url":site_url+'image.png',
