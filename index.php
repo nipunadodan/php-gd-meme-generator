@@ -98,7 +98,7 @@
                             <input id="title" name="title" placeholder="Title" class="dark-mode" style="font-weight: normal" />
                             <input type="hidden" name="title_" id="title_">
 
-                            <div id="title-settings-container" class="bg-secondary rounded p-2 mt-2 settings-container" style="display: none">
+                            <div id="title-settings-container" class="bg-secondary rounded px-2 pt-0 pb-3 pb-md-2 mt-2 settings-container" style="display: none">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Lines</label>
@@ -128,7 +128,7 @@
                             <textarea id="body" name="body" placeholder="Body" class="dark-mode" style="font-weight: normal"></textarea>
                             <input type="hidden" name="body_" id="body_">
 
-                            <div id="body-settings-container" class="bg-secondary rounded p-2 mt-2 settings-container" style="display: none">
+                            <div id="body-settings-container" class="bg-secondary rounded px-2 pt-0 pb-3 pb-md-2 mt-2 settings-container" style="display: none">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Lines</label>
