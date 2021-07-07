@@ -272,8 +272,13 @@ function testAPI(message) {
                 "access_token":res.data[0].access_token,
                 "published": (nature === 'publish'),
                 "unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
-                "scheduled_publish_time":(scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '')
             };
+
+            if(nature === "schedule"){
+                params.push({
+                    "scheduled_publish_time":(scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '')
+                })
+            }
 
             FB.api(
                 '/130471229144380/photos',
