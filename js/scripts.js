@@ -263,7 +263,7 @@ function testAPI(message) {
         }).done(function (res) {
             console.log(res);
 
-            const nature = $('input[name="nature"]').val();
+            const nature = $('input[name="nature"]:checked').val();
             const scheduledTime = $('input[name="schedule-datetime"]').val();
 
             let params = {
@@ -280,6 +280,7 @@ function testAPI(message) {
                 params.unpublished_content_type = (nature === "schedule" ? "SCHEDULED" : "DRAFT")
             }
 
+            console.log(nature);
             console.log(params);
 
             FB.api(
