@@ -50,6 +50,7 @@
             top: 2px;
         }
         .settings-container label{
+            color: #ffffff;
             font-size: 0.8rem !important;
         }
         input, textarea{
