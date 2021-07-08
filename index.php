@@ -191,29 +191,35 @@
                         </div>
                     </div>
                 </form>
-                <div class="row" id="facebook-publishing" style="display: none">
-                    <div class="col-md-6">
-                        <label class="d-block w-100">Publishing Settings</label>
-                        <input name="nature" value="schedule" type="radio" class="form-check-input" id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>
-                        <input name="nature" value="draft" type="radio" class="form-check-input" id="draft" checked><label for="draft" class="d-inline ms-2">Draft</label>
-                        <input name="nature" value="publish" type="radio" class="form-check-input" id="publish"><label for="publish" class="d-inline ms-2">Publish</label>
-                    </div>
-                    <div class="col-md-6 form">
-                        <label for="date">Date</label>
-                        <input type="datetime-local" name="schedule-datetime">
-                    </div>
-                </div>
-
-                <div class="row my-4">
-                    <div class="col-md-3">
-                        <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer mt-4 mt-md-0" id="post-to-facebook">
-                            <i class="lab la-facebook la-2x"></i> Publish
+                <div id="facebook-publishing" style="display: none">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="d-block w-100">Publishing Settings</label>
+                            <input name="nature" value="schedule" type="radio" class="form-check-input"
+                                   id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>
+                            <input name="nature" value="draft" type="radio" class="form-check-input" id="draft" checked><label
+                                    for="draft" class="d-inline ms-2">Draft</label>
+                            <input name="nature" value="publish" type="radio" class="form-check-input"
+                                   id="publish"><label for="publish" class="d-inline ms-2">Publish</label>
+                        </div>
+                        <div class="col-md-6 form">
+                            <label for="date">Date</label>
+                            <input type="datetime-local" name="schedule-datetime">
                         </div>
                     </div>
 
-                    <div class="col-md-3">
-                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                        </fb:login-button>
+                    <div class="row my-4">
+                        <div class="col-md-3">
+                            <div class="h-100 d-flex align-content-center flex-wrap cursor-pointer mt-4 mt-md-0"
+                                 id="post-to-facebook">
+                                <i class="lab la-facebook la-2x"></i> Publish
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                            </fb:login-button>
+                        </div>
                     </div>
                 </div>
             </div>

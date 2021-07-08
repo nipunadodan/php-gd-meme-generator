@@ -206,14 +206,14 @@ function statusChangeCallback(response) {
     $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
         ex.preventDefault();
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            const yes = confirm('Are you sure want to post to Facebook?');
-            if(yes) {
-                $(this).attr('style', 'display:none !important');
+            if(confirm('Are you sure want to post to Facebook?')) {
                 const title = $('img').data('title');
                 const tag = $('#tag').val();
+
+                $('#facebook-publishing').hide();
                 testAPI(title+'\n\n#'+tag);
 
-                var spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
+                const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
                 $('.nav-title').after(spinner);
                 $('button, input[type="submit"]').attr('disabled','true');
             }
