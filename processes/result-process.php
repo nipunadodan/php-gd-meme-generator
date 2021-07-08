@@ -192,7 +192,7 @@ imagepng($im,'image.png');
 
 $return = [
     'status' => 'success',
-    'image' => 'data:image/png;base64, '.base64_encode($imagestring),
+    'image' => base64_encode($imagestring),
     'message' => 'Successfully created the image',
     'background' => $bg_image_upload,
     'dimensions' => [

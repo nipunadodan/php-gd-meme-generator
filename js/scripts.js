@@ -1,6 +1,26 @@
 
 //var site_url = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
+const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+}
+
 function ajaxDirectX({func: func, data: data, silent: silent = false, method:method = 'post', process:process = func+'-process'} = {}){
     if(debug === true)
         console.log('ajax-init~'+process);
@@ -115,8 +135,14 @@ dyn_functions['result'] = function (json) {
     const tagColour = $('#tag-colour').val();
     const bgColour = $('#background-colour').val();
     if(json.status === 'success') {
+        const contentType = 'image/png';
+        const b64Data = json.image;
+
+        const blob = b64toBlob(b64Data, contentType);
+        const blobUrl = URL.createObjectURL(blob);
+
         $('.result').show().attr({
-            src: json.image,
+            src: blobUrl,
             "data-title":title
         });
         $('#result, #facebook-publishing').show();
