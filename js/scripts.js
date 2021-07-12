@@ -312,7 +312,7 @@ function testAPI(message) {
             console.log(params);
 
             FB.api(
-                '/104125658445604/photos',
+                '/'+res.data[0].id+'/photos',
                 'POST',
                 params,
                 function(response) {
