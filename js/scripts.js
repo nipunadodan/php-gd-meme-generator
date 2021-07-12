@@ -283,9 +283,9 @@ function testAPI(message) {
             method:'GET'
         }).done(function (res) {
             console.log(res);
-
+            $('select#page').html('');
             $.each(res.data, function (key, page) {
-                $('select#page').html('').append(
+                $('select#page').append(
                     '<option value="'+key+'">'+page.name+'</option>'
                 );
             })
