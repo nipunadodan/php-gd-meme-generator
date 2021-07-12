@@ -194,6 +194,8 @@
                 <div id="facebook-publishing" style="display: none">
                     <div class="row">
                         <div class="col-md-6">
+                            <label for="page">Page</label>
+                            <select id="page"></select>
                             <label class="d-block w-100">Publishing Settings</label>
                             <input name="nature" value="schedule" type="radio" class="form-check-input"
                                    id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>

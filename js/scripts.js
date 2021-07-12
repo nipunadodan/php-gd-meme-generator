@@ -229,8 +229,7 @@ function statusChangeCallback(response) {
         console.log(response);
         // The current login status of the person.
     }
-    $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
-        ex.preventDefault();
+
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
             if(confirm('Are you sure want to post to Facebook?')) {
                 const title = $('img').data('title');
@@ -247,7 +246,7 @@ function statusChangeCallback(response) {
             // Not logged into your webpage or we are unable to tell.
             responseModal('warning', 'Please login to Facebook');
         }
-    });
+
 }
 
 
@@ -289,43 +288,53 @@ function testAPI(message) {
         }).done(function (res) {
             console.log(res);
 
-            const nature = $('input[name="nature"]:checked').val();
-            let scheduledTime = $('input[name="schedule-datetime"]').val();
-            scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
+            $.each(res.data, function (key, page) {
+                $('select#page').html('').append(
+                    '<option value="'+key+'">'+page.name+'</option>'
+                );
+            })
 
-            let params = {
-                "url":site_url+'image.png',
-                "caption":message,
-                "access_token":res.data[0].access_token,
-                "published": (nature === 'publish'),
-                //"unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
-            };
+            $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
+                ex.preventDefault();
+                const page = $('select#page').val();
+                const nature = $('input[name="nature"]:checked').val();
+                let scheduledTime = $('input[name="schedule-datetime"]').val();
+                scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
 
-            if(nature === "schedule"){
-                params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
-                //params.unpublished_content_type = "SCHEDULED";
-            }else if(nature === "draft"){
-                params.unpublished_content_type = "DRAFT";
-            }
+                let params = {
+                    "url":site_url+'image.png',
+                    "caption":message,
+                    "access_token":res.data[page].access_token,
+                    "published": (nature === 'publish'),
+                    //"unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
+                };
 
-            console.log(nature);
-            console.log(params);
-
-            FB.api(
-                '/'+res.data[0].id+'/photos',
-                'POST',
-                params,
-                function(response) {
-                    console.log(response);
-                    if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
-                        responseModal('success','Successfully posted');
-                        $('button, input[type="submit"]').prop("disabled", false);
-                        $('#spinner').remove();
-                    }else{
-                        responseModal('danger','Error in posting');
-                    }
+                if(nature === "schedule"){
+                    params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
+                    //params.unpublished_content_type = "SCHEDULED";
+                }else if(nature === "draft"){
+                    params.unpublished_content_type = "DRAFT";
                 }
-            );
+
+                console.log(nature);
+                console.log(params);
+
+                FB.api(
+                    '/'+res.data[page].id+'/photos',
+                    'POST',
+                    params,
+                    function(response) {
+                        console.log(response);
+                        if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
+                            responseModal('success','Successfully posted');
+                            $('button, input[type="submit"]').prop("disabled", false);
+                            $('#spinner').remove();
+                        }else{
+                            responseModal('danger','Error in posting');
+                        }
+                    }
+                );
+            });
         });
     });
 }
