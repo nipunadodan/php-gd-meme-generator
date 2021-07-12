@@ -231,17 +231,13 @@ function statusChangeCallback(response) {
     }
 
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            if(confirm('Are you sure want to post to Facebook?')) {
-                const title = $('img').data('title');
-                const tag = $('#tag').val();
+            const title = $('img').data('title');
+            const tag = $('#tag').val();
 
-                $('#facebook-publishing').hide();
-                testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happenes
 
-                const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
-                $('.nav-title').after(spinner);
-                $('button, input[type="submit"]').attr('disabled','true');
-            }
+            testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happenes
+
+
         } else {
             // Not logged into your webpage or we are unable to tell.
             responseModal('warning', 'Please login to Facebook');
@@ -295,45 +291,53 @@ function testAPI(message) {
             })
 
             $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
-                ex.preventDefault();
-                const page = $('select#page').val();
-                const nature = $('input[name="nature"]:checked').val();
-                let scheduledTime = $('input[name="schedule-datetime"]').val();
-                scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
+                if(confirm('Are you sure want to post to Facebook?')) {
+                    ex.preventDefault();
 
-                let params = {
-                    "url":site_url+'image.png',
-                    "caption":message,
-                    "access_token":res.data[page].access_token,
-                    "published": (nature === 'publish'),
-                    //"unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
-                };
+                    const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
+                    $('.nav-title').after(spinner);
+                    $('button, input[type="submit"]').attr('disabled','true');
+                    $('#facebook-publishing').hide();
 
-                if(nature === "schedule"){
-                    params.scheduled_publish_time= (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
-                    //params.unpublished_content_type = "SCHEDULED";
-                }else if(nature === "draft"){
-                    params.unpublished_content_type = "DRAFT";
-                }
+                    const page = $('select#page').val();
+                    const nature = $('input[name="nature"]:checked').val();
+                    let scheduledTime = $('input[name="schedule-datetime"]').val();
+                    scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
 
-                console.log(nature);
-                console.log(params);
+                    let params = {
+                        "url": site_url + 'image.png',
+                        "caption": message,
+                        "access_token": res.data[page].access_token,
+                        "published": (nature === 'publish'),
+                        //"unpublished_content_type":(nature === "schedule" ? "SCHEDULED" : nature === "publish" ? "PUBLISHED" : "DRAFT"),
+                    };
 
-                FB.api(
-                    '/'+res.data[page].id+'/photos',
-                    'POST',
-                    params,
-                    function(response) {
-                        console.log(response);
-                        if(response.hasOwnProperty('post_id') || response.hasOwnProperty('id')){
-                            responseModal('success','Successfully posted');
-                            $('button, input[type="submit"]').prop("disabled", false);
-                            $('#spinner').remove();
-                        }else{
-                            responseModal('danger','Error in posting');
-                        }
+                    if (nature === "schedule") {
+                        params.scheduled_publish_time = (scheduledTime !== 'undefined' || scheduledTime !== '' ? scheduledTime : '');
+                        //params.unpublished_content_type = "SCHEDULED";
+                    } else if (nature === "draft") {
+                        params.unpublished_content_type = "DRAFT";
                     }
-                );
+
+                    console.log(nature);
+                    console.log(params);
+
+                    FB.api(
+                        '/' + res.data[page].id + '/photos',
+                        'POST',
+                        params,
+                        function (response) {
+                            console.log(response);
+                            if (response.hasOwnProperty('post_id') || response.hasOwnProperty('id')) {
+                                responseModal('success', 'Successfully posted');
+                                $('button, input[type="submit"]').prop("disabled", false);
+                                $('#spinner').remove();
+                            } else {
+                                responseModal('danger', 'Error in posting');
+                            }
+                        }
+                    );
+                }
             });
         });
     });
