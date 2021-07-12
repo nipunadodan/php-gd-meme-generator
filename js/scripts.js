@@ -237,7 +237,7 @@ function statusChangeCallback(response) {
                 const tag = $('#tag').val();
 
                 $('#facebook-publishing').hide();
-                testAPI(title+'\n\n#'+tag);
+                testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happenes
 
                 const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
                 $('.nav-title').after(spinner);
@@ -312,7 +312,7 @@ function testAPI(message) {
             console.log(params);
 
             FB.api(
-                '/130471229144380/photos',
+                '/104125658445604/photos',
                 'POST',
                 params,
                 function(response) {
