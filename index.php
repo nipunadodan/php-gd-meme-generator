@@ -194,19 +194,20 @@
                 <div id="facebook-publishing" style="display: none">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="page">Page</label>
-                            <select id="page"></select>
-                            <label class="d-block w-100">Publishing Settings</label>
-                            <input name="nature" value="schedule" type="radio" class="form-check-input"
-                                   id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>
-                            <input name="nature" value="draft" type="radio" class="form-check-input" id="draft" checked><label
-                                    for="draft" class="d-inline ms-2">Draft</label>
-                            <input name="nature" value="publish" type="radio" class="form-check-input"
-                                   id="publish"><label for="publish" class="d-inline ms-2">Publish</label>
+                            <div class="form">
+                                <label for="page">Page</label>
+                                <select id="page"></select>
+                            </div>
                         </div>
-                        <div class="col-md-6 form">
-                            <label for="date">Date</label>
-                            <input type="datetime-local" name="schedule-datetime">
+                        <div class="col-md-6">
+                            <label class="d-block w-100">Publishing Settings</label>
+                            <input name="nature" value="schedule" type="radio" class="form-check-input" id="schedule"><label for="schedule" class="d-inline ms-2">Schedule</label>
+                            <input name="nature" value="draft" type="radio" class="form-check-input" id="draft" checked><label for="draft" class="d-inline ms-2">Draft</label>
+                            <input name="nature" value="publish" type="radio" class="form-check-input" id="publish"><label for="publish" class="d-inline ms-2">Publish</label>
+                            <div class="form">
+                                <label for="date">Date</label>
+                                <input type="datetime-local" name="schedule-datetime">
+                            </div>
                         </div>
                     </div>
 
