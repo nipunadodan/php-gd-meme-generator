@@ -153,7 +153,12 @@
                     <div class="row">
                         <div class="col-md-9">
                             <label>Tag</label>
-                            <input name="tag" id="tag" placeholder="Tag" value="dodanperks" class="dark-mode" style="font-weight: normal" />
+                            <input name="tag" id="tag" placeholder="Tag" value="dodanperks" autocomplete="off" list="tags" class="dark-mode" style="font-weight: normal" />
+                            <datalist id="tags">
+                                <option value="dodanperks">
+                                <option value="dailyaviation">
+                                <option value="srilankanairlinesfans">
+                            </datalist>
                         </div>
                         <div class="col-md-3">
                             <label>Colour</label>
