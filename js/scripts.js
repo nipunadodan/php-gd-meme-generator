@@ -226,23 +226,17 @@ function statusChangeCallback(response) {
     // Called with the results from FB.getLoginStatus().
     if(debug) {
         console.log('statusChangeCallback');
-        console.log(response);
-        // The current login status of the person.
+        console.log(response);// The current login status of the person.
     }
+    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+        const title = $('#title').val();
+        const tag = $('#tag').val();
 
-        if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-            const title = $('img').data('title');
-            const tag = $('#tag').val();
-
-
-            testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happenes
-
-
-        } else {
-            // Not logged into your webpage or we are unable to tell.
-            responseModal('warning', 'Please login to Facebook');
-        }
-
+        testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happens
+    } else {
+        // Not logged into your webpage or we are unable to tell.
+        responseModal('warning', 'Please login to Facebook');
+    }
 }
 
 
@@ -253,7 +247,6 @@ function checkLoginState() {
     });
 }
 
-
 window.fbAsyncInit = function() {
     FB.init({
         appId      : '2198458126957638', //3951933178262590
@@ -261,7 +254,6 @@ window.fbAsyncInit = function() {
         xfbml      : true,                     // Parse social plugins on this webpage.
         version    : 'v11.0'           // Use this Graph API version for this call. Prev v10.0
     });
-
 
     FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
         statusChangeCallback(response);        // Returns the login status.
@@ -348,5 +340,5 @@ $(document).ready(function () {
         const id = $(this).attr('id');
         $(this).toggleClass('la-gear la-times');
         $('#'+id+'-container').toggle();
-    })
+    });
 })
