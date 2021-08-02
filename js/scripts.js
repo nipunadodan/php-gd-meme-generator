@@ -229,10 +229,12 @@ function statusChangeCallback(response) {
         console.log(response);// The current login status of the person.
     }
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        let title = localStorage.getItem('gdText-title');
-        let tag = localStorage.getItem('gdText-tag');
+        $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
+            let title = localStorage.getItem('gdText-title');
+            let tag = localStorage.getItem('gdText-tag');
 
-        testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happens
+            testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happens
+        });
     } else {
         // Not logged into your webpage or we are unable to tell.
         responseModal('warning', 'Please login to Facebook');
@@ -282,7 +284,6 @@ function testAPI(message) {
                 );
             })
 
-            $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
                 if(confirm('Are you sure want to post to Facebook?\n\n'+message)) {
                     ex.preventDefault();
 
@@ -330,7 +331,7 @@ function testAPI(message) {
                         }
                     );
                 }
-            });
+
         });
     });
 }
