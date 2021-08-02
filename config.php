@@ -7,7 +7,7 @@ if(DEBUG){
     error_reporting(E_ALL);
 }
 
-define('VERSION', 'v1.2.1.011');
+define('VERSION', 'v1.2.1.012');
 
 define("DOMAIN", (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/");
 include_once "env.php";

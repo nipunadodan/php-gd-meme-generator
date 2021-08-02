@@ -229,13 +229,7 @@ function statusChangeCallback(response) {
         console.log(response);// The current login status of the person.
     }
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
-            ex.preventDefault();
-            let title = localStorage.getItem('gdText-title');
-            let tag = localStorage.getItem('gdText-tag');
-
-            testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happens
-        });
+        testAPI(); //TODO: send blob to api and see what happens
     } else {
         // Not logged into your webpage or we are unable to tell.
         responseModal('warning', 'Please login to Facebook');
@@ -264,7 +258,7 @@ window.fbAsyncInit = function() {
 };
 
 
-function testAPI(message) {
+function testAPI() {
     // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
 
     FB.api('/me', function(response) {
@@ -285,7 +279,9 @@ function testAPI(message) {
                 );
             })
 
+            $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
                 if(confirm('Are you sure want to post to Facebook?\n\n'+message)) {
+                    ex.preventDefault();
 
                     const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
                     $('.nav-title').after(spinner);
@@ -296,6 +292,9 @@ function testAPI(message) {
                     const nature = $('input[name="nature"]:checked').val();
                     let scheduledTime = $('input[name="schedule-datetime"]').val();
                     scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
+                    const title = localStorage.getItem('gdText-title');
+                    const tag = localStorage.getItem('gdText-tag');
+                    const message = title+'\n\n#'+tag
 
                     let params = {
                         "url": site_url + 'image.png',
@@ -331,7 +330,7 @@ function testAPI(message) {
                         }
                     );
                 }
-
+            });
         });
     });
 }
