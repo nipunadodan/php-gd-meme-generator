@@ -280,6 +280,10 @@ function testAPI() {
             })
 
             $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
+                const title = localStorage.getItem('gdText-title');
+                const tag = localStorage.getItem('gdText-tag');
+                const message = title+'\n\n#'+tag
+
                 if(confirm('Are you sure want to post to Facebook?\n\n'+message)) {
                     ex.preventDefault();
 
@@ -292,9 +296,6 @@ function testAPI() {
                     const nature = $('input[name="nature"]:checked').val();
                     let scheduledTime = $('input[name="schedule-datetime"]').val();
                     scheduledTime = parseInt((new Date(scheduledTime).getTime() / 1000).toFixed(0))
-                    const title = localStorage.getItem('gdText-title');
-                    const tag = localStorage.getItem('gdText-tag');
-                    const message = title+'\n\n#'+tag
 
                     let params = {
                         "url": site_url + 'image.png',
