@@ -229,7 +229,7 @@ function statusChangeCallback(response) {
         console.log(response);// The current login status of the person.
     }
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        const title = $('#title').val();
+        const title = $('img#resultImage').data('title');
         const tag = $('#tag').val();
 
         testAPI(title+'\n\n#'+tag); //TODO: send blob to api and see what happens

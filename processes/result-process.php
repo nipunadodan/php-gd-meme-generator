@@ -192,6 +192,7 @@ imagepng($im,'image.png');
 
 $return = [
     'status' => 'success',
+    'title' => $title, // don't remove this. will break the title in the caption
     'image' => base64_encode($imagestring),
     'message' => 'Successfully created the image',
     'background' => $bg_image_upload,
