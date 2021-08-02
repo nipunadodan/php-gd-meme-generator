@@ -283,7 +283,7 @@ function testAPI(message) {
             })
 
             $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
-                if(confirm('Are you sure want to post to Facebook?')) {
+                if(confirm('Are you sure want to post to Facebook?\n\n'+message)) {
                     ex.preventDefault();
 
                     const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
