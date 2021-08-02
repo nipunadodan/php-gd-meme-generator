@@ -230,6 +230,7 @@ function statusChangeCallback(response) {
     }
     if (response.status === 'connected') {   // Logged into your webpage and Facebook.
         $('body').unbind('click').on('click', '#post-to-facebook', function (ex) {
+            ex.preventDefault();
             let title = localStorage.getItem('gdText-title');
             let tag = localStorage.getItem('gdText-tag');
 
@@ -285,7 +286,6 @@ function testAPI(message) {
             })
 
                 if(confirm('Are you sure want to post to Facebook?\n\n'+message)) {
-                    ex.preventDefault();
 
                     const spinner = ' <i class="la la-circle-o-notch la-spin" id="spinner"></i>';
                     $('.nav-title').after(spinner);
